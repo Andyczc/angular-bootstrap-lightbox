@@ -59,10 +59,10 @@ angular.module('bootstrapLightbox').provider('Lightbox', function () {
       return {
         // 92px = 2 * (30px margin of .modal-dialog
         //             + 1px border of .modal-content
-        //             + 15px padding of .modal-body)
+        //             + 53px padding of .modal-body)
         // with the goal of 30px side margins; however, the actual side margins
         // will be slightly less (at 22.5px) due to the vertical scrollbar
-        'maxWidth': dimensions.windowWidth - 92,
+        'maxWidth': dimensions.windowWidth - 168,
         // 126px = 92px as above
         //         + 34px outer height of .lightbox-nav
         'maxHeight': dimensions.windowHeight - 126
@@ -71,8 +71,8 @@ angular.module('bootstrapLightbox').provider('Lightbox', function () {
       return {
         // 52px = 2 * (10px margin of .modal-dialog
         //             + 1px border of .modal-content
-        //             + 15px padding of .modal-body)
-        'maxWidth': dimensions.windowWidth - 52,
+        //             + 53px padding of .modal-body)
+        'maxWidth': dimensions.windowWidth - 128,
         // 86px = 52px as above
         //        + 34px outer height of .lightbox-nav
         'maxHeight': dimensions.windowHeight - 86
@@ -94,13 +94,14 @@ angular.module('bootstrapLightbox').provider('Lightbox', function () {
   this.calculateModalDimensions = function (dimensions) {
     // 400px = arbitrary min width
     // 32px = 2 * (1px border of .modal-content
-    //             + 15px padding of .modal-body)
-    var width = Math.max(400, dimensions.imageDisplayWidth + 32);
+    //             + 53px padding of .modal-body)
+    var width = Math.max(400, dimensions.imageDisplayWidth + 108);
 
     // 200px = arbitrary min height
     // 66px = 32px as above
     //        + 34px outer height of .lightbox-nav
-    var height = Math.max(200, dimensions.imageDisplayHeight + 66);
+    //        + 53px height of lightbox-photo-date
+    var height = Math.max(200, dimensions.imageDisplayHeight + 66 + 53);
 
     // first case:  the modal width cannot be larger than the window width
     //              20px = arbitrary value larger than the vertical scrollbar
@@ -270,13 +271,13 @@ angular.module('bootstrapLightbox').provider('Lightbox', function () {
       Lightbox.modalInstance.result['finally'](function () {
         // prevent the lightbox from flickering from the old image when it gets
         // opened again
-        Lightbox.images = [];
-        Lightbox.index = 1;
-        Lightbox.image = {};
-        Lightbox.imageUrl = null;
-        Lightbox.imageCaption = null;
+        // Lightbox.images = [];
+        // Lightbox.index = 1;
+        // Lightbox.image = {};
+        // Lightbox.imageUrl = null;
+        // Lightbox.imageCaption = null;
 
-        Lightbox.keyboardNavEnabled = false;
+        // Lightbox.keyboardNavEnabled = false;
 
         // complete any lingering loading bar progress
         if (cfpLoadingBar) {
