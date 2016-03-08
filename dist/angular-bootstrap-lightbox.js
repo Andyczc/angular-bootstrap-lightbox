@@ -340,6 +340,19 @@ angular.module('bootstrapLightbox').provider('Lightbox', function () {
         'windowClass': 'lightbox-modal'
       }, modalParams || {}));
 
+      Lightbox.modalInstance.closed.then(function(){
+        // prevent the lightbox from flickering from the old image when it gets
+        // opened again
+        Lightbox.images = [];
+        Lightbox.index = 1;
+        Lightbox.image = {};
+        Lightbox.imageUrl = null;
+        Lightbox.imageCaption = null;
+
+        Lightbox.keyboardNavEnabled = false;
+
+      });
+
       // modal close handler
       Lightbox.modalInstance.result['finally'](function () {
         // prevent the lightbox from flickering from the old image when it gets
@@ -358,6 +371,7 @@ angular.module('bootstrapLightbox').provider('Lightbox', function () {
           cfpLoadingBar.complete();
         }
       });
+
 
       return Lightbox.modalInstance;
     };
